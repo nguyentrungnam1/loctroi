@@ -24,7 +24,7 @@ public class OrderFarmerResponse {
     }
     //TRuyền DTO OrderFarmerDTO
     //Chuyển DTO Sang Response
-
+//ok
     public OrderFarmerResponse(OrderFarmerDTO orderFarmerDTO , String dailytiepnhan , String sale_name) {
         if(orderFarmerDTO != null ) {
             this.id = orderFarmerDTO.getId();
