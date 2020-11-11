@@ -21,9 +21,10 @@ public class OrderFarmerController {
     @Autowired
     OrderFarmerService orderFarmerService;
     @GetMapping("/get_order_farmer")
-    public JSONObject getOrderFarmer(@RequestParam("creatStart")long creatStart
-            , @RequestParam("creatFinish")long creatFinsih , @RequestParam("district_id") long district_id , @RequestParam("city_id") long city_id){
-        return orderFarmerService.findByCreate(creatStart,creatFinsih, district_id,city_id);
+    public JSONObject getOrderFarmer(@RequestParam("creatStart") long creatStart
+            , @RequestParam("creatFinish")long creatFinsih , @RequestParam("district_id") long district_id
+            , @RequestParam("city_id") long city_id,@RequestParam("page")int page) {
+        return orderFarmerService.findByCreate(creatStart,creatFinsih, district_id,city_id,page);
 
     }
 }

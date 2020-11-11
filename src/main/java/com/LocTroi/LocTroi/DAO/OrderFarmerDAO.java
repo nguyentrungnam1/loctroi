@@ -21,10 +21,10 @@ public class OrderFarmerDAO {
     OrderFarmerRepository orderFarmerRepository;
 
 
-    public List<OrderFarmerDTO> findByCreateDate(Date startDate , Date finishDate, long district_id , long city_id){
+    public List<OrderFarmerDTO> findByCreateDate(Date startDate , Date finishDate, long district_id , long city_id,int begin,int size){
         try {
             List<OrderFarmerDTO> listDto = new ArrayList<>();
-            List<OrderFarmerEntity> listEntity = orderFarmerRepository.findByCreateDate(startDate,finishDate,district_id,city_id);
+            List<OrderFarmerEntity> listEntity = orderFarmerRepository.findByCreateDate(startDate,finishDate,district_id,city_id,begin,size);
             for(OrderFarmerEntity enti : listEntity){
                 OrderFarmerDTO orderFarmerDTO = new OrderFarmerDTO(enti);
                 listDto.add(orderFarmerDTO);
@@ -35,5 +35,9 @@ public class OrderFarmerDAO {
         }
         return new ArrayList<>();
 
+    }
+    public int countTotal(Date startDate , Date finishDate, long district_id , long city_id){
+        int entity = orderFarmerRepository.countTotal(startDate,finishDate,district_id,city_id);
+        return entity;
     }
 }

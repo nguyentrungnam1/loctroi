@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface OrderFarmerService {
-    JSONObject findByCreate(long creatStart , long creatFinish, long district_id , long city_id);
+    JSONObject findByCreate(long creatStart , long creatFinish, long district_id , long city_id,int page);
 }

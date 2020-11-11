@@ -30,16 +30,18 @@ public class OrderFarmerServiceImp implements OrderFarmerService {
     UserAgencyDAO userAgencyDAO;
     @Override
     // truyền int page
-    public JSONObject findByCreate(long creatStart, long creatFinish , long district_id , long city_id) {
+    public JSONObject findByCreate(long creatStart, long creatFinish , long district_id , long city_id,int page) {
         try{
                 int size= 10;
-//            int begin = (page -1)*size;
+                int begin = (page -1)*size;
 
-            int total=0;
+            //int total=0;
+
             Date dateStart = new Date(creatStart);
             Date dateFinish = new Date(creatFinish);
+            int total = orderFarmerDAO.countTotal( dateStart, dateFinish , district_id,city_id);
             //orderFarmerDAO.findByCreateDate(creatStart , creatFinish);
-            List<OrderFarmerDTO> listDto = orderFarmerDAO.findByCreateDate(dateStart , dateFinish,district_id,city_id);
+            List<OrderFarmerDTO> listDto = orderFarmerDAO.findByCreateDate(dateStart , dateFinish,district_id,city_id,begin,size);
             List<OrderFarmerResponse> listResponse = new ArrayList<>();
             for(OrderFarmerDTO dto : listDto){
                 String dailytiepnhan = "";
@@ -76,9 +78,9 @@ public class OrderFarmerServiceImp implements OrderFarmerService {
 
             }
             JSONObject data = new JSONObject();
-            data.put("total", 0);//
+            data.put("total", total);//
             data.put("size", size);
-            data.put("result",listResponse );
+            data.put("result",listResponse);
             return data;
         }catch (Exception e) {
 
